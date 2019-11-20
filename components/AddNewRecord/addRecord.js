@@ -4,7 +4,7 @@ import HeaderComp from '../patientslist/header/header'
 import { addrecord } from '../../store/actions/dataActions'
 import { connect } from 'react-redux'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import {  Header } from 'react-native-elements'
+import { Header } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 class addRecord extends Component {
@@ -21,18 +21,18 @@ class addRecord extends Component {
         const id = this.props.id
         return (
             <View style={{ backgroundColor: "white", flex: 1 }}>
-            <Header backgroundColor="white"
-            leftComponent={<TouchableOpacity delayLongPress={0}><Icon name="chevron-left" size={25} color="green" onPress={() => { Actions.history() }}></Icon></TouchableOpacity>}
-            ></Header>
+                <Header backgroundColor="white"
+                    leftComponent={<TouchableOpacity delayLongPress={0}><Icon name="chevron-left" size={25} color="green" onPress={() => { Actions.history() }}></Icon></TouchableOpacity>}
+                ></Header>
                 <KeyboardAwareScrollView>
                     <View style={styles.inputView}>
-                        <Text style={{ fontSize: 30, fontWeight: "bold", textAlign: "center", color: "green" }}>Add New Record</Text>
+                        <Text style={{ fontSize: 30, fontWeight: "bold", textAlign: "center", color: "#00ace6" }}>Add New Record</Text>
 
                         <TextInput placeholder="Enter Check Up Date" style={styles.inputs} onChangeText={(checkupDate) => { this.setState({ checkupDate }) }}></TextInput>
 
                         <TextInput placeholder="Enter Medicines You Suggested" style={styles.inputs} onChangeText={(medicineSuggested) => { this.setState({ medicineSuggested }) }}></TextInput>
                         <TextInput placeholder="Enter Cost" style={styles.inputs} onChangeText={(cost) => { this.setState({ cost }) }}></TextInput>
-                        <TouchableOpacity delayLongPress={0} style={styles.buttons} onPress={() => { this.props.addrecord(this.state, id)  }}>
+                        <TouchableOpacity delayLongPress={0} style={styles.buttons} onPress={() => { this.props.addrecord(this.state, id) }}>
                             <Text style={styles.buttontext}>Add To History</Text>
                         </TouchableOpacity>
                     </View>
@@ -44,12 +44,13 @@ class addRecord extends Component {
 }
 const styles = StyleSheet.create({
     inputs: {
-        backgroundColor: "#ccd9ff",
+       
         borderRadius: 10,
         height: 40,
         marginTop: 20,
         padding: 5,
-        paddingLeft: 20
+        paddingLeft: 10,
+        borderBottomWidth : 2,
 
 
     },
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
 
     },
     buttons: {
-        backgroundColor: "#007f00",
+        backgroundColor: "#00ace6",
         width: 180,
         height: 50,
         marginLeft: "auto",
@@ -71,12 +72,12 @@ const styles = StyleSheet.create({
         marginTop: 20,
         justifyContent: "center",
         alignItems: 'center',
-        borderRadius: 20
+        borderRadius: 10
 
     },
     buttontext: {
         color: "white",
-        fontSize: 15,
+        fontSize: 18,
     }
 
 })

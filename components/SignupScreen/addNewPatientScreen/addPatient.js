@@ -16,14 +16,14 @@ class addPatient extends Component {
         }
     }
     render() {
-        console.log(this.state)
+       
         return (
 
             <View style={{ backgroundColor: "white", flex: 1 }}>
                 <HeaderComp />
                 <KeyboardAwareScrollView>
                     <View style={styles.inputView}>
-                        <Text style={{ fontSize: 30, fontWeight: "bold", textAlign: "center", color: "green" }}>Add New Patient</Text>
+                        <Text style={{ fontSize:25, fontWeight: "bold", textAlign: "center", color: "green" }}>Add New Patient</Text>
 
                         <TextInput placeholder="Enter Patient Name" style={styles.inputs} onChangeText={(name) => { this.setState({ name }) }}></TextInput>
 
@@ -51,12 +51,13 @@ class addPatient extends Component {
 }
 const styles = StyleSheet.create({
     inputs: {
-        backgroundColor: "#ccd9ff",
+        
         borderRadius: 10,
         height: 40,
         marginTop: 20,
         padding: 5,
-        paddingLeft: 20
+        paddingLeft: 10,
+        borderBottomWidth:2
 
 
     },
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
 
     },
     buttons: {
-        backgroundColor: "#007f00",
+        backgroundColor: "orange",
         width: 180,
         height: 50,
         marginLeft: "auto",
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     },
     buttontext: {
         color: "white",
-        fontSize: 15,
+        fontSize: 20,
     }
 
 })

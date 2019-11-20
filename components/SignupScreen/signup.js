@@ -38,7 +38,7 @@ class Signup extends Component {
     }
 
     async UNSAFE_componentWillReceiveProps(nextProps, nextState) {
-        console.log(nextProps)
+      
         if (nextProps.auth.authError === "SIGNUP_FAILED") {
             console.log("aya")
             return await this.setState({
@@ -50,7 +50,7 @@ class Signup extends Component {
 
 
     render() {
-        console.log(this.props.auth)
+        
 
         return (
             <View style={styles.mainView}>
@@ -58,14 +58,14 @@ class Signup extends Component {
                     <ImageBackground source={LoginBackground} style={styles.back}>
                         <KeyboardAwareScrollView style={{ flex: 1 }}>
                             <Animatable.Image animation="zoomIn" source={Logo} style={styles.logo}></Animatable.Image>
-                            <Animatable.Text animation="slideInLeft" style={styles.text}>Welcome To KAMI's Patient Tracking App, Signup Now</Animatable.Text>
+                            <Animatable.Text style={styles.text}>Welcome To KAMI's Patient Tracking App, Signup Now</Animatable.Text>
 
 
                             <View style={styles.inputView}>
-                                <Animatable.View animation="slideInUp">
-                                <TextInput placeholder="Enter Your Name" style={styles.inputs} onChangeText={(name) => { this.setState({ name }) }}></TextInput>
-                                <TextInput placeholder="Enter Your Email" style={styles.inputs} onChangeText={(email) => { this.setState({ email }) }} ></TextInput>
-                                <TextInput placeholder="Enter Your Password" secureTextEntry={true} style={styles.inputs} onChangeText={(password) => { this.setState({ password }) }}></TextInput>
+                                <Animatable.View>
+                                    <TextInput placeholder="Enter Your Name" style={styles.inputs} onChangeText={(name) => { this.setState({ name }) }}></TextInput>
+                                    <TextInput placeholder="Enter Your Email" style={styles.inputs} onChangeText={(email) => { this.setState({ email }) }} ></TextInput>
+                                    <TextInput placeholder="Enter Your Password" secureTextEntry={true} style={styles.inputs} onChangeText={(password) => { this.setState({ password }) }}></TextInput>
                                 </Animatable.View>
                                 <View>
                                     <Text style={styles.error}>{this.state.error}</Text>

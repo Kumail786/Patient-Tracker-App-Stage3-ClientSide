@@ -36,7 +36,7 @@ class Login extends Component {
 
 
     async UNSAFE_componentWillReceiveProps(nextProps, nextState) {
-        console.log(nextProps.auth)
+        
         if (nextProps.auth.authError === "SIGNIN_FAILED") {
             console.log("aya")
             return await this.setState({
@@ -48,7 +48,7 @@ class Login extends Component {
 
     render() {
 
-        console.log(this.props.auth)
+       
 
 
 
@@ -58,15 +58,15 @@ class Login extends Component {
                     <ImageBackground source={LoginBackground} style={styles.back}>
                         <KeyboardAwareScrollView>
                             <Animatable.Image animation="zoomIn" source={Logo} style={styles.logo}></Animatable.Image>
-                            <Animatable.Text animation="fadeInLeft" style={styles.text}>Hello Doctor, Login To Get Started</Animatable.Text>
+                            <Animatable.Text  style={styles.text}>Hello Doctor, Login To Get Started</Animatable.Text>
 
                             <View style={styles.inputView}>
-<Animatable.View animation="slideInDown">
-                                <TextInput placeholder="Enter Your Email" style={styles.inputs} onChangeText={(email) => this.setState({ email })}></TextInput>
+                                <Animatable.View>
+                                    <TextInput placeholder="Enter Your Email" style={styles.inputs} onChangeText={(email) => this.setState({ email })}></TextInput>
 
-                                
-                            <TextInput secureTextEntry={true} placeholder="Enter Your Password" style={styles.inputs} onChangeText={(password) => this.setState({ password })}></TextInput>
-                            </Animatable.View>
+
+                                    <TextInput secureTextEntry={true} placeholder="Enter Your Password" style={styles.inputs} onChangeText={(password) => this.setState({ password })}></TextInput>
+                                </Animatable.View>
                                 <Text style={styles.error}>{this.state.error}</Text>
                                 <TouchableOpacity delayLongPress={0} style={styles.buttons} onPress={() => {
                                     console.log(this.state)

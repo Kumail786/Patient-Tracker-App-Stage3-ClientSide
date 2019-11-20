@@ -30,7 +30,7 @@ export const addpatient = (data) => {
 export const getHistory = (id) => {
     return (dispatch) => {
         axios.get(`https://us-central1-fir-cloud-functions-prac.cloudfunctions.net/specific?id=${id}`).then(res => {
-            console.log(res)
+            
             dispatch({ type: ActionTypes.GET_HISTORY, payload: res.data })
 
         }).catch((error) => {
