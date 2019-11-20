@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, TouchableOpacity, ImageBackground, Image, TextInput, SafeAreaView,ActivityIndicator } from 'react-native'
+import { Text, View, ScrollView, TouchableOpacity, ImageBackground, Image, TextInput, SafeAreaView, ActivityIndicator } from 'react-native'
 import { Header } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import SearchBar from 'react-native-search-bar';
@@ -9,8 +9,10 @@ import { getPatients } from '../../store/actions/dataActions'
 import { Actions } from 'react-native-router-flux';
 import { logOut, idGetter } from '../../store/actions/authActions';
 import { ListItem } from 'react-native-elements'
-import Loader from '../../images/laoder.gif'
 import * as Animatable from 'react-native-animatable'
+import {firebaseConfig} from '../../config/firebase.config'
+import * as firebase from 'firebase'
+
 class Patientlist extends Component {
 
     constructor() {
@@ -18,12 +20,38 @@ class Patientlist extends Component {
         this.state = {
             keyword: '',
             loading: true,
-            patients : []
+            patients: []
 
         }
+        
 
     }
+
+   
     async UNSAFE_componentWillMount() {
+        let allpatients;
+        if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig)
+        }
+       
+         const patientref = firebase.database().ref('/patients')
+        
+         patientref.on('value',async snapshot=>{
+            allpatients = []
+             console.log(snapshot.val())
+             snapshot.forEach(snap=>{
+                 if(snap.val().docid === this.props.auth.auth.doctor._id){
+                 allpatients.push(snap.val())
+                }
+
+             })
+             await this.setState({
+                 patients : allpatients
+             })
+         })
+       
+
+
         this.props.getPatients()
         await this.setState({
             logout: false
@@ -33,7 +61,7 @@ class Patientlist extends Component {
         if (nextProps.patients) {
             await this.setState({
                 loading: false,
-                patients : nextProps.patients,
+                patients: nextProps.patients,
             })
         }
 
@@ -41,6 +69,8 @@ class Patientlist extends Component {
 
 
     render() {
+
+
         const patients = this.state.patients
         
         var totalpatients = 0
@@ -48,7 +78,7 @@ class Patientlist extends Component {
 
 
         if (!this.state.logout && !this.state.loading) {
-            
+
 
             return (
 
@@ -104,23 +134,23 @@ class Patientlist extends Component {
             )
         } else {
             return <View>
-            <Header backgroundColor={"white"}
-                        leftComponent={<TouchableOpacity onLongPress={() => { Actions.loggedIn() }}><Icon name="chevron-left" size={25} color="green" onPress={() => { Actions.loggedIn() }}></Icon></TouchableOpacity>}
-                        centerComponent={<Animatable.View animation="slideInLeft" style={{ width: "130%", borderRadius: 10, borderRightWidth: 2, borderTopWidth: 2, borderLeftWidth: 2, borderBottomWidth: 2, paddingTop: 10 }}>
-                            <TextInput placeholder="Search For The Patient" style={{ textAlign: "center" }} onChangeText={(keyword) => { this.setState({ keyword }) }}></TextInput>
-                        </Animatable.View>}
-                        rightComponent={<Icon name="sign-out" size={25} color="red" onPress={async () => {
+                <Header backgroundColor={"white"}
+                    leftComponent={<TouchableOpacity onLongPress={() => { Actions.loggedIn() }}><Icon name="chevron-left" size={25} color="green" onPress={() => { Actions.loggedIn() }}></Icon></TouchableOpacity>}
+                    centerComponent={<Animatable.View animation="slideInLeft" style={{ width: "130%", borderRadius: 10, borderRightWidth: 2, borderTopWidth: 2, borderLeftWidth: 2, borderBottomWidth: 2, paddingTop: 10 }}>
+                        <TextInput placeholder="Search For The Patient" style={{ textAlign: "center" }} onChangeText={(keyword) => { this.setState({ keyword }) }}></TextInput>
+                    </Animatable.View>}
+                    rightComponent={<Icon name="sign-out" size={25} color="red" onPress={async () => {
 
-                            this.props.logOut()
-                            await this.setState({
-                                logout: true
-                            })
-                        }}></Icon>}
-                    />
-                    <View style={{marginVertical:200}}>
-                <ActivityIndicator size="large" color="orange"  />
+                        this.props.logOut()
+                        await this.setState({
+                            logout: true
+                        })
+                    }}></Icon>}
+                />
+                <View style={{ marginVertical: 200 }}>
+                    <ActivityIndicator size="large" color="orange" />
                 </View>
-                </View>
+            </View>
         }
 
     }

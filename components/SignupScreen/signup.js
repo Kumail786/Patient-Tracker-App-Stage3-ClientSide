@@ -38,7 +38,7 @@ class Signup extends Component {
     }
 
     async UNSAFE_componentWillReceiveProps(nextProps, nextState) {
-      
+
         if (nextProps.auth.authError === "SIGNUP_FAILED") {
             console.log("aya")
             return await this.setState({
@@ -50,7 +50,7 @@ class Signup extends Component {
 
 
     render() {
-        
+
 
         return (
             <View style={styles.mainView}>

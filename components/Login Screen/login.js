@@ -48,7 +48,12 @@ class Login extends Component {
 
     render() {
 
+       if(this.props.auth.auth){
+
        
+           Actions.loggedIn()
+        
+       }
 
 
 

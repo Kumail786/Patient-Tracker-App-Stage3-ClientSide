@@ -8,8 +8,9 @@ import { Actions } from 'react-native-router-flux';
 import { getHistory } from '../../store/actions/dataActions'
 import Loader from '../../images/laoder.gif'
 import { ListItem } from 'react-native-elements'
-import * as Animatable from 'react-native-animatable'
-    ;
+import * as Animatable from 'react-native-animatable';
+import * as firebase from 'firebase'
+import {firebaseConfig} from '../../config/firebase.config'
 class PatientHistory extends Component {
 
     constructor() {
@@ -24,13 +25,23 @@ class PatientHistory extends Component {
     async UNSAFE_componentWillMount() {
 
         this.props.getHistory(this.props.id)
+        if(!firebase.apps.length){
+            firebase.initializeApp(firebaseConfig)
+        }
+        const historyrf = firebase.database().ref(`/patients/${this.props.id}`)
+        historyrf.on('value', async snapshot=>{
+            let history = snapshot.val()
+            
+            await this.setState({
+                patient : history
+            })
+        })
 
     }
 
 
     async UNSAFE_componentWillReceiveProps(nextProps, nextState) {
-        console.log(nextProps.patient)
-        console.log(this.state)
+        
         await this.setState({
             loading: false,
             patient : nextProps.patient
@@ -43,7 +54,7 @@ class PatientHistory extends Component {
         if (!this.state.loading) {
             const history = this.state.patient.history
 console.log(history)
-
+let a = 0
             return (
 
                 <View style={{ width: "100%", marginLeft: "auto", marginRight: "auto", backgroundColor: "white", flex: 1 }}>
@@ -66,10 +77,10 @@ console.log(history)
                                 {history && history
                                     .filter(items => (items.checkupDate).toLowerCase().includes(this.state.keyword))
                                     .map(data => {
-
+                                     a = a + 1;
                                         return (
                                             <ListItem
-                                                key={data}
+                                                key={a}
                                                 title={<View><Text style={{ fontSize: 15, textTransform: "capitalize" }}>Checkup Date : {data.checkupDate}</Text></View>}
                                                 bottomDivider
                                                 pad={20}
