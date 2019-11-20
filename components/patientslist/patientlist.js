@@ -18,6 +18,7 @@ class Patientlist extends Component {
         this.state = {
             keyword: '',
             loading: true,
+            patients : []
 
         }
 
@@ -31,7 +32,8 @@ class Patientlist extends Component {
     async UNSAFE_componentWillReceiveProps(nextProps, nextState) {
         if (nextProps.patients) {
             await this.setState({
-                loading: false
+                loading: false,
+                patients : nextProps.patients,
             })
         }
 
@@ -39,7 +41,7 @@ class Patientlist extends Component {
 
 
     render() {
-        const patients = this.props.patients
+        const patients = this.state.patients
         
         var totalpatients = 0
 

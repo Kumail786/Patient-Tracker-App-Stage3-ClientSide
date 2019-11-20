@@ -17,6 +17,7 @@ class PatientHistory extends Component {
         this.state = {
             keyword: '',
             loading: true,
+            patient : {}
         }
 
     }
@@ -31,7 +32,8 @@ class PatientHistory extends Component {
         console.log(nextProps.patient)
         console.log(this.state)
         await this.setState({
-            loading: false
+            loading: false,
+            patient : nextProps.patient
         })
     }
 
@@ -39,7 +41,7 @@ class PatientHistory extends Component {
 
         
         if (!this.state.loading) {
-            const history = this.props.patient.history
+            const history = this.state.patient.history
 console.log(history)
 
             return (
