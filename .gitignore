@@ -41,6 +41,7 @@ buck-out/
 *.keystore
 !debug.keystore
 
+config/firebase.config.js
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
