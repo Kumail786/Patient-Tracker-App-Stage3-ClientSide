@@ -70,7 +70,9 @@ class Patientlist extends Component {
 
     render() {
 
-
+if(!this.props.auth.auth.doctor){
+    Actions.login()
+}
         const patients = this.state.patients
         
         var totalpatients = 0

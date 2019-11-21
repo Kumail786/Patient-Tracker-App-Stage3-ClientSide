@@ -49,7 +49,9 @@ class PatientHistory extends Component {
     }
 
     render() {
-
+if(!this.props.auth.auth.doctor){
+    Actions.login()
+}
         
         if (!this.state.loading) {
             const history = this.state.patient.history
