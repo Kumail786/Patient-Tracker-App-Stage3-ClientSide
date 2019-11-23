@@ -28,7 +28,7 @@ export const SignIn = (data) => {
     return (dispatch) => {
         axios.post("https://mighty-ocean-20865.herokuapp.com/doctor/login", data).then(res => {
            
-            
+            Actions.loggedIn()
             dispatch({
                 type: ActionsTypes.SIGNIN_SUCCESS,
                 payload: res.data
@@ -46,7 +46,7 @@ export const SignIn = (data) => {
 }
 
 export const logOut = () => {
-    Actions.login()
+    
     return (dispatch) => {
         
         dispatch({

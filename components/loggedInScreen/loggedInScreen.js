@@ -31,9 +31,7 @@ class LoggedInScreen extends Component {
     }
 
     render() {
-        if(!this.props.auth.auth.doctor){
-            Actions.login()
-        }
+       
         if ((!this.state.loader || this.props.auth.auth) && this.props.auth.auth.doctor) {
             
             const name = this.props.auth.auth.doctor.name

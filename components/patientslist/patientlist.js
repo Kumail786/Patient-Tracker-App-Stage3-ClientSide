@@ -29,13 +29,15 @@ class Patientlist extends Component {
 
    
     async UNSAFE_componentWillMount() {
+        
         let allpatients;
         if (!firebase.apps.length) {
+            console.log("1st time")
         firebase.initializeApp(firebaseConfig)
         }
-       
+       console.log(firebase.apps)
          const patientref = firebase.database().ref('/patients')
-        
+        console.log(patientref)
          patientref.on('value',async snapshot=>{
             allpatients = []
              console.log(snapshot.val())
@@ -56,6 +58,7 @@ class Patientlist extends Component {
         await this.setState({
             logout: false
         })
+    
     }
     async UNSAFE_componentWillReceiveProps(nextProps, nextState) {
         if (nextProps.patients) {
@@ -79,7 +82,7 @@ if(!this.props.auth.auth.doctor){
 
 
 
-        if (!this.state.logout && !this.state.loading) {
+        if (!this.state.logout && !this.state.loading && this.props.auth.auth.doctor) {
 
 
             return (
