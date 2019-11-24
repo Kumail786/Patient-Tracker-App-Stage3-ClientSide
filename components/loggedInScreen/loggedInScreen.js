@@ -35,7 +35,7 @@ class LoggedInScreen extends Component {
         if ((!this.state.loader || this.props.auth.auth) && this.props.auth.auth.doctor) {
             
             const name = this.props.auth.auth.doctor.name
-            const changed = name.split(' ')[0]
+            const docname = name.split(' ')[0]
             return (
                 <ImageBackground source={Background} style={{ width: "100%", height: "100%" }}>
                     <Animatable.View  style={{ flex: 1, alignItems: "center", paddingTop: 20 }}>
@@ -48,7 +48,7 @@ class LoggedInScreen extends Component {
                             </View>
                         </Animatable.View>
                         <View style={{ marginTop: 20, paddingHorizontal: 30 }}>
-                            <Text style={{ fontWeight: "bold", fontSize: 30, color: "white" }}>Hello Doctor {changed}</Text>
+                            <Text style={{ fontWeight: "bold", fontSize: 30, color: "white" }}>Hello Doctor {docname}</Text>
                             <Text style={{ fontWeight: "bold", fontSize: 30, color: "white" }}>Manage Your Patients</Text>
                         </View>
 
