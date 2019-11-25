@@ -21,6 +21,8 @@ class LoggedInScreen extends Component {
         this.state = {
             loader: true
         }
+
+        
     }
     async  UNSAFE_componentWillReceiveProps(nextProps, nextState) {
         if (nextProps.auth.auth.doctor) {
